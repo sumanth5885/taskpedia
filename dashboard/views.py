@@ -597,12 +597,18 @@ def delete_lec_profile(request, pk):
 
 @login_required
 def lecture_assignment(request):
-    lf = get_object_or_404(LectureProfile, user=request.user)
-    assignment = Assignments.objects.filter(lecture=lf)
-    context = {
-        'assignment':assignment
-    }
-    return render(request, 'dashboard/lecture_assignment.html', context)
+    obj = LectureProfile.objects.filter(user=request.user)
+    if obj:
+        lf = get_object_or_404(LectureProfile, user=request.user)
+        if lf:
+            assignment = Assignments.objects.filter(lecture=lf)
+            context = {
+                'assignment':assignment
+            }
+            return render(request, 'dashboard/lecture_assignment.html', context)
+    else:
+        return redirect('lecture_profile')
+
 
 
 
