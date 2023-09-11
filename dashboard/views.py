@@ -477,18 +477,22 @@ def dictionary(request):
 
 @login_required
 def assignment(request):
-    # Get the StudentProfile instance associated with the logged-in user
-    student_profile = get_object_or_404(StudentProfile, user=request.user)
-
-    # Now, filter assignments by the StudentProfile instance
-    assignment = Assignments.objects.filter(student=student_profile).order_by('-date')
-    current_time = timezone.now()
-    context = {
-        'assignment': assignment,
-        'current_time' : current_time
-    }
-    return render(request, 'dashboard/assignment.html', context) 
-
+    sp = StudentProfile.objects.filter(user=request.user)
+    if sp:
+        student_profile = get_object_or_404(StudentProfile, user=request.user)
+        assignment = Assignments.objects.filter(student=student_profile).order_by('-date')
+        if assignment:
+            current_time = timezone.now()
+            context = {
+                'assignment': assignment,
+                'current_time' : current_time
+            }
+            return render(request, 'dashboard/assignment.html', context) 
+        else:
+            messages.error(request, 'No Lectures Found')
+            return redirect('home')
+    else:
+        return redirect('profile')
 
 @login_required
 def edit_assignment(request, pk):
