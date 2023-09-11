@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <style>
+    /* CSS Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .profile-card {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .profile-card .slideshow-container {
+      position: relative;
+      height: 200px;
+    }
+
+    .profile-card .slideshow-container .slide {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .profile-card .slideshow-container .slide.active {
+      display: block;
+    }
+
+    .profile-card .slideshow-container .slide:hover {
+      transform: scale(1.1);
+      filter: brightness(80%);
+    }
+
+    .profile-card .slideshow-container .controls {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    .profile-card .slideshow-container .controls button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      margin: 0 5px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .profile-card .info {
+      padding: 20px;
+    }
+
+    .profile-card h2 {
+      margin-top: 0;
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .profile-card p {
+      color: #777;
+      margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      .profile-card {
+        width: 100%;
+      }
+    }
+
+    .profile-card .slideshow-container .caption {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .profile-card:hover .slideshow-container .caption {
+      opacity: 1;
+    }
+
+    .profile-card .slideshow-container:hover .controls {
+      transform: translateY(-50%);
+    }
+
+    .profile-card .slideshow-container .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0s linear 0.3s;
+    }
+
+    .profile-card .slideshow-container .fullscreen.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s;
+    }
+
+    .profile-card .slideshow-container .fullscreen img {
+      max-height: 80vh;
+      max-width: 80vw;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>About Us</h1>
+    <div class="profile">
+      <div class="profile-card">
+        <div class="slideshow-container">
+          <img class="slide active" src="koushik.jpg" alt="Person 1 Image 1">
+          <img class="slide" src="shubha.jpg" alt="Person 1 Image 2">
+          <img class="slide" src="sumanth.jpg" alt="Person 1 Image 3">
+          <div class="caption">John Doe</div>
+          <div class="fullscreen"></div>
+        </div>
+        <div class="controls">
+          <button onclick="changeSlide(-1)">◀</button>
+          <button onclick="changeSlide(1)">▶</button>
+        </div>
+        <div class="info">
+          <h2>John Doe</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in turpis mauris.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="slideshow-container">
+          <img class="slide active" src="shubha.jpg" alt="Person 2 Image 1">
+          <img class="slide" src="sumanth.jpg" alt="Person 2 Image 2">
+          <img class="slide" src="koushik.jpg" alt="Person 2 Image 3">
+          <div class="caption">Jane Smith</div>
+          <div class="fullscreen"></div>
+        </div>
+        <div class="controls">
+          <button onclick="changeSlide(-1)">◀</button>
+          <button onclick="changeSlide(1)">▶</button>
+        </div>
+        <div class="info">
+          <h2>Jane Smith</h2>
+          <p>Phasellus consequat pharetra lorem vel elementum. Sed non semper risus.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="slideshow-container">
+          <img class="slide active" src="sumanth.jpg" alt="Person 3 Image 1">
+          <img class="slide" src="koushik.jpg" alt="Person 3 Image 2">
+          <img class="slide" src="shubha.jpg" alt="Person 3 Image 3">
+          <div class="caption">Michael Johnson</div>
+          <div class="fullscreen"></div>
+        </div>
+        <div class="controls">
+          <button onclick="changeSlide(-1)">◀</button>
+          <button onclick="changeSlide(1)">▶</button>
+        </div>
+        <div class="info">
+          <h2>Michael Johnson</h2>
+          <p>Praesent condimentum augue sit amet efficitur interdum. Vivamus vulputate cursus purus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript functionality
+    const profileCards = Array.from(document.getElementsByClassName('profile-card'));
+
+    function changeSlide(n, profileIndex) {
+      const currentProfile = profileCards[profileIndex];
+      const slides = currentProfile.getElementsByClassName('slide');
+      const captions = currentProfile.getElementsByClassName('caption');
+      const currentSlide = currentProfile.querySelector('.slide.active');
+      const currentCaption = currentProfile.querySelector('.caption');
+
+      // Find the index of the current slide within the profile
+      const slideIndex = Array.from(slides).indexOf(currentSlide);
+
+      // Hide the current active slide and caption
+      currentSlide.classList.remove('active');
+      currentCaption.classList.remove('active');
+
+      // Calculate the next slide index
+      let nextSlideIndex = slideIndex + n;
+
+      // Ensure the slide index wraps around within the valid range
+      if (nextSlideIndex < 0) {
+        nextSlideIndex = slides.length - 1;
+      } else if (nextSlideIndex >= slides.length) {
+        nextSlideIndex = 0;
+      }
+
+      // Show the new slide and caption
+      slides[nextSlideIndex].classList.add('active');
+      captions[nextSlideIndex].classList.add('active');
+    }
+
+    // Attach event listeners to the buttons
+    const controls = Array.from(document.getElementsByClassName('controls'));
+    controls.forEach((control, profileIndex) => {
+      const prevButton = control.querySelector('button:nth-child(1)');
+      const nextButton = control.querySelector('button:nth-child(2)');
+
+      prevButton.addEventListener('click', () => {
+        changeSlide(-1, profileIndex);
+      });
+
+      nextButton.addEventListener('click', () => {
+        changeSlide(1, profileIndex);
+      });
+    });
+
+    // Fullscreen image on click
+    const slideshows = Array.from(document.getElementsByClassName('slideshow-container'));
+    slideshows.forEach((slideshow) => {
+      const slides = slideshow.getElementsByClassName('slide');
+      const fullscreen = slideshow.querySelector('.fullscreen');
+
+      slides.forEach((slide) => {
+        slide.addEventListener('click', () => {
+          fullscreen.innerHTML = '';
+          const img = document.createElement('img');
+          img.src = slide.src;
+          fullscreen.appendChild(img);
+          fullscreen.classList.add('active');
+        });
+      });
+
+      fullscreen.addEventListener('click', () => {
+        fullscreen.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+
+</html>

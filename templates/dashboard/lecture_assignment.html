@@ -1,0 +1,80 @@
+{% extends 'dashboard/lecture_base.html' %}
+{% load static %}
+{% block title %}Assignment details{% endblock title %}
+
+{% block maincontent %}
+
+
+
+<div class="col-sm-8 offset-sm-1 my-3">
+    <br>
+<a class="btn btn-success" href="#" role="button">Add New</a> {{ current_time }}
+<br>
+<hr>
+<div class="table-responsive">
+    <caption class="text-center"> <b style="color:rgb(1, 73, 97); font-family: cursive; font-weight: 900;">ASSIGNMENT TABLE</b></caption> <hr>
+    
+    <table  class="table table-info">
+        
+        
+        <thead class="table-light">
+            
+            <tr>
+                <th scope="col">Student</th>
+                <th scope="col">Reg No</th>
+                <th scope="col">Class</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Valued</th>
+                <th scope="col">Update</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in assignment %}
+            <tr>
+                <td>{{ a.student.user }}</td>
+                <td>{{ a.student.reg_no }}</td>
+                <td>{{ a.student.cls }}</td>
+                <td>{{ a.title }}</td>
+                <td>{{ a.description }}</td>
+                
+                <td> <input class="form-check-input" type="checkbox" {% if a.valued %}checked{% endif %} value="" disabled>
+                    <label class="form-check-label text-light" for="flexCheckDefault">
+                    <b style="color: black;">Valued</b>
+                    </label> </td>
+
+                <td> <a href="{% url 'edit_assignment_lec' a.id %}"><i class="fa fa-edit fa-1x" ></i></a>
+                {% comment %} <td>
+                    {% if h.completed %}
+                        <p style="color:green;"> <b>Completed</b> </p>
+                    {% elif h.due_date < current_time %}
+                        <p style="color:red;"> <b>Due</b> </p>
+                    {% else %}
+                        <p style="color:orange;"> <b>Pending</b> </p>
+                    {% endif %}
+                </td>
+                {% if h.due_date > current_time %}
+                <td>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'edit_homework' h.id %}" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_homework' h.id %}" role="button"><i class="fa fa-trash fa-1x"></i></a>   
+
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-warning btn-sm" href="#" role="button">Due</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_homework' h.id %}" role="button"><i class="fa fa-trash fa-1x"></i></a>                </td>
+                {% endif %}    
+                <td>
+                    <a class="btn btn-success btn-sm" href="{% url 'view_homework' h.id %}" role="button">View</a>
+                </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+    
+</div>
+
+{% endblock maincontent %}

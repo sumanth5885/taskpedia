@@ -1,0 +1,48 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}Student Profile{% endblock title %}
+{% block maincontent %}
+
+{% if pro %}
+{% for p in pro  %}
+
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-md-3" >
+            <img src="{{p.img.url}}" alt="Profile Image" class="img-fluid rounded-circle profile-image">
+            <div class="card-footer mt-auto ">
+                <a href="{% url 'edit_profile' p.id %}"><i class="fas fa-edit fa-2x" ></i></a>
+                <a href="{% url 'delete_profile' p.id %}"><i class="fa fa-trash fa-2x" ></i></a>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <h1><b>{{p.full_name|capfirst}}</b></h1>
+            <p><b>Class:</b> {{p.cls}}</p>
+            <p><b>Reg No:</b> {{p.reg_no}} </p>
+            <p><b>Email:</b> {{p.email}}</p>
+            <p><b>Phone:</b> {{p.phone}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="col-sm-8 offset-sm-1 my-5">
+    <form action="" method="post" novalidate enctype="multipart/form-data">
+     {% csrf_token %}
+     {% for field in form %}
+       <div class="form-group col-lg-6 mb-3">
+         <b>{{field.label_tag}}</b> {{field}} <small class="text-danger"> {{field.errors|striptags}} </small>
+       </div>
+     {% endfor %}
+     <div class="col-12 mt-3">
+       <button type="submit" class="btn btn-primary mb-3">Submit</button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+{% endif %}
+
+{% endblock maincontent %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        <input type="text" id="name">
+        <input type="email" id="email">
+        <input type="text" id="subject">
+        <textarea id="message" cols="30" rows="10"></textarea>
+        <button id="btn">Send</button>
+    </form>
+
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+
+    <script>
+        var btn = document.getElementById('btn');
+        btn.addEventListener('click',function(e){
+            e.preventDefault()
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+            var body = 'name: '+name + '<br/> email: ' + email + '<br/> subject: ' +subject+'<br/> message: '+message;
+
+                            Email.send({
+                    SecureToken : "d7dad16f-f832-4df3-ac48-5bc1bbffcdca",
+                    To : 'shubhaspoojari58@gmail.com',
+                    From : "sumanthspoojary58@gmail.com",
+                    Subject : "contact message",
+                    Body : body
+                }).then(
+                    message => alert(message)
+                );
+
+
+        })
+    </script>
+</body>
+</html>

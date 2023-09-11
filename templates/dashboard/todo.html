@@ -1,0 +1,59 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}ToDo Details{% endblock title %}
+
+{% block maincontent %}
+
+
+
+<div class="col-sm-8 offset-sm-1 my-3">
+    <br>
+<a class="btn btn-success" href="{% url 'add_new_todo' %}" role="button">Add New</a> {{ current_time }}
+<br>
+<hr>
+<div class="table-responsive">
+    <caption class="text-center"> <b style="color:rgb(1, 73, 97); font-family: cursive; font-weight: 900;">ToDo TABLE</b></caption> <hr>
+    
+    <table  class="table table-info">
+        
+        
+        <thead class="table-dark">
+            
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Finished</th>
+                <th scope="col">Date/Time</th>
+                <th scope="col">Delete</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in todo %}
+            <tr>
+                <td>{{ t.title|capfirst }}</td>
+                
+                <td>
+                    <a href="{% url 'edit_todo' t.id %}">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" {% if t.finished %}checked{% endif %}>
+                            <label class="form-check-label text-light" for="flexCheckDefault">
+                            <b style="color: black;">Done</b>
+                            </label>
+                        </div>
+                    </a>
+                </td>                
+
+                <td>{{ t.date_time }}</td>
+                <td> <a class="btn btn-danger btn-sm" href="{% url 'delete_todo' t.id %}" role="button"><i class="fa fa-trash fa-1x"></i></a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+    
+</div>
+
+{% endblock maincontent %}

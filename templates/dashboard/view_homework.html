@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}View Homework{% endblock title %}
+
+{% block maincontent %}
+
+{% for hw in homeworks  %}
+
+
+<div class="container my-5">
+  <div class="col-sm-5 offset-sm-1">
+    
+   <h2><b style="font-family: cursive;">Subject</b>: <b style="font-family: cursive; color: #A38A00;">{{hw.subject|capfirst}}</b> </h2>
+   <b>{{current_time}}</b>
+   <hr>
+   <b>Title:</b> <b style="color: #A38A00;">{{hw.title|capfirst}}</b><br><br>
+   <b>Description:</b> <b style="color: #A38A00;">{{hw.description|capfirst}}</b><br><br>
+   <b>Start Date:</b> <b style="color: #A38A00;"> {{hw.start_date}} </b><br><br>
+   <b>Due Date:</b> <b style="color: #A38A00;">{{hw.due_date}}</b><br><br>
+   <b>Status:</b> <b style="color: #A38A00;">{% if hw.completed %}<b style="color:green;">Completed</b>{% elif hw.due_date < current_time %}<b style="color:red;">Due</b>{% else %}<b style="color:orange;">Pending</b>{% endif %}
+    
+           
+    
+      
+    
+       
+    
+   
+
+
+{% endfor %}
+
+
+
+
+
+   
+  </div>
+ </div>
+</div>
+{% endblock maincontent %}

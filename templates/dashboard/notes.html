@@ -1,0 +1,45 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+{% block maincontent %}
+
+<br>
+<div class="container">
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Notes</legend>
+        </fieldset>
+        <div class="form-group">
+            
+            <a class="btn btn-warning btn-sm" href="{% url 'create_notes' %}" role="button">Create</a>
+        </div>
+</div>
+<br>
+  
+
+<div class="container">
+    <div class="row" >
+        {% for n in notes  %}
+        <div class="col-md-3">
+            <a href="#">
+                <div class="card">
+                    <div class="card-header"><b style="margin-right: 70px;">{{n.title|capfirst}}</b><small>{{n.date}}</small></div>
+                    <div class="card-body">{{n.description}}</div>
+                    <div class="card-footer mt-auto ">
+                        <a href="{% url 'delete_notes' n.id %}"><i class="fa fa-trash fa-2x" style="margin-right: 155px;"></i></a>
+                        <a href="{% url 'edit_notes' n.id %}"><i class="fas fa-edit fa-2x"></i></a>
+                    </div>
+                  
+                </div>
+            </a>
+            
+        </div>
+        
+        {% endfor %}
+        
+    </div>
+</div>
+
+<br><br>
+
+
+{% endblock maincontent %}

@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %}Homework details{% endblock title %}
+
+{% block maincontent %}
+
+
+
+<div class="col-sm-8 offset-sm-1 my-3">
+    <br>
+<a class="btn btn-success" href="{% url 'add_new_homework' %}" role="button">Add New</a> {{ current_time }}
+<br>
+<hr>
+<div class="table-responsive">
+    <caption class="text-center"> <b style="color:rgb(1, 73, 97); font-family: cursive; font-weight: 900;">HOME WORK TABLE</b></caption> <hr>
+    
+    <table  class="table table-info">
+        
+        
+        <thead class="table-light">
+            
+            <tr>
+                <th scope="col">Subject</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Update</th>
+                <th scope="col">View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in hw %}
+            <tr>
+                <td>{{ h.subject|capfirst }}</td>
+                <td>{{ h.due_date }}</td>
+                <td>
+                    {% comment %} <input type="checkbox" {% if h.completed %}checked{% endif %}> {% endcomment %}
+                    {% if h.completed %}
+                        <p style="color:green;"> <b>Completed</b> </p>
+                    {% elif h.due_date < current_time %}
+                        <p style="color:red;"> <b>Due</b> </p>
+                    {% else %}
+                        <p style="color:orange;"> <b>Pending</b> </p>
+                    {% endif %}
+                </td>
+                {% if h.due_date > current_time %}
+                <td>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'edit_homework' h.id %}" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_homework' h.id %}" role="button"><i class="fa fa-trash fa-1x"></i></a>   
+
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-warning btn-sm" href="#" role="button">Due</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_homework' h.id %}" role="button"><i class="fa fa-trash fa-1x"></i></a>                </td>
+                {% endif %}    
+                <td>
+                    <a class="btn btn-success btn-sm" href="{% url 'view_homework' h.id %}" role="button">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+    
+</div>
+
+{% endblock maincontent %}
